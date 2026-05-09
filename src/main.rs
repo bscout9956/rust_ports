@@ -6,7 +6,7 @@ fn main() -> io::Result<()> {
     let mut n_flag: bool = false;
     let mut i: usize;
 
-    if argv.len() > 1 && argv.get(1).is_some() && argv.get(1).unwrap() != "-n" {
+    if argv.len() > 1 && argv.get(0).is_some() && argv.get(0).unwrap() == "-n" {
         n_flag = true;
     }
 
