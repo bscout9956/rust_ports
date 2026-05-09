@@ -17,8 +17,7 @@ fn makedir(path: &str, mode: u32) -> Result<(), Error> {
     if does_file_exist {
         println!("mkdir: {} already exists\n", path);
     } else {
-        std::fs::create_dir(path)?;
-        // This only exists on unix. We sstill handle Windows just in case.
+        // This only exists on unix. We still handle Windows just in case.
         // No idea about Mac lmao
         #[cfg(unix)]
         {
@@ -32,6 +31,7 @@ fn makedir(path: &str, mode: u32) -> Result<(), Error> {
             println!(
                 "You're on Windows NT, the directory will be created with default permissions..."
             );
+            std::fs::create_dir(path)?;
         }
     }
     return Ok(());
