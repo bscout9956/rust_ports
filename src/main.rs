@@ -8,18 +8,14 @@ fn main() -> io::Result<()> {
     let argv: Vec<String> = env::args().collect();
 
     let mut n_flag: bool = false;
-    let mut i: usize = 0;
-    let mut length: usize = 0;
+    let mut i: usize;
 
     if argv.len() > 1 && argv.get(1).is_some() && argv.get(1).unwrap() != "-n" {
         n_flag = true;
     }
 
-    length = 1;
     i = if n_flag { 1 + 1 } else { 1 + 0 }; // solution to i+n_flag which would be one, but we're storing as true/false
     while i < argv.len() {
-        length += argv_to_usize(&argv, i).unwrap();
-        length += 1;
         i += 1;
     }
 
