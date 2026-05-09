@@ -1,4 +1,4 @@
-use std::{env, io::{self, Write}, num::ParseIntError};
+use std::{env, io::{self, Write}};
 
 fn main() -> io::Result<()> {
     let argv: Vec<String> = env::args().collect();
