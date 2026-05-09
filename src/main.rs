@@ -43,7 +43,9 @@ fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
     let splits: Vec<&str> = path.split("/").collect();
 
     for sub_str in splits {
-        path_str.push('/');
+        if !path_str.starts_with("/") {
+            path_str.push('/');
+        }
         path_str.push_str(sub_str);
 
         println!("Checking if {} exists", path_str);
