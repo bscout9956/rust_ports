@@ -1,11 +1,13 @@
-use std::{env, io::{self, Write}};
+use std::{
+    env,
+    io::{self, Write},
+};
 
 fn main() -> io::Result<()> {
     let argv: Vec<String> = env::args().collect();
 
     let mut n_flag: bool = false;
-    let mut i: usize;
-
+    
     if argv.len() > 1 && argv.get(0).is_some() && argv.get(0).unwrap() == "-n" {
         n_flag = true;
     }
