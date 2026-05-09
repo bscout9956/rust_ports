@@ -115,12 +115,13 @@ fn main() -> Result<(), Error> {
         for dir in directories {
             if p_flag {
                 makedirp(dir, mode)?;
-            }
-            else {
+            } else {
                 makedir(dir, mode)?;
             }
         }
+    } else {
+        usage();
     }
-    
+
     Ok(())
 }
