@@ -1,9 +1,5 @@
 use std::{env, io::{self, Write}, num::ParseIntError};
 
-fn argv_to_usize(argv: &Vec<String>, index: usize) -> Result<usize, ParseIntError> {
-    argv.get(index).unwrap().parse::<usize>()
-}
-
 fn main() -> io::Result<()> {
     let argv: Vec<String> = env::args().collect();
 
