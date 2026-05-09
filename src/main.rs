@@ -19,13 +19,6 @@ fn main() -> io::Result<()> {
         i += 1;
     }
 
-    // for(i = 1+nflag; i < argc; i++){
-    // 	strcpy(p, argv[i]);
-    // 	p += strlen(p);
-    // 	if(i < argc-1)
-    // 		*p++ = ' ';
-    // }
-
     let mut p: String = String::new(); // p seems to be the buffer for the string
     i = if n_flag { 1 + 1 } else { 1 + 0 };
     while i < argv.len() {
