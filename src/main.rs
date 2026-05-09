@@ -104,7 +104,7 @@ fn main() -> Result<(), Error> {
                     // Transforming the char into an octal value stored in u32
                     let mode_res = u32::from_str_radix(mode_str.as_str(), 8);
                     if mode_res.is_ok() {
-                        mode = u32::from_str_radix(mode_str.as_str(), 8).unwrap();
+                        mode = mode_res.unwrap();
                         println!("Converted mode: {} to u32: {}", mode_str, mode);
                         break; // We break, we found the mode
                     } else {
