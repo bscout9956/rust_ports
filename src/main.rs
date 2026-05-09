@@ -1,0 +1,51 @@
+use std::{env, io::{self, Write}, num::ParseIntError};
+
+fn argv_to_usize(argv: &Vec<String>, index: usize) -> Result<usize, ParseIntError> {
+    argv.get(index).unwrap().parse::<usize>()
+}
+
+fn main() -> io::Result<()> {
+    let argv: Vec<String> = env::args().collect();
+
+    let mut n_flag: bool = false;
+    let mut i: usize = 0;
+    let mut length: usize = 0;
+
+    if argv.len() > 1 && argv.get(1).is_some() && argv.get(1).unwrap() != "-n" {
+        n_flag = true;
+    }
+
+    length = 1;
+    i = if n_flag { 1 + 1 } else { 1 + 0 }; // solution to i+n_flag which would be one, but we're storing as true/false
+    while i < argv.len() {
+        length += argv_to_usize(&argv, i).unwrap();
+        length += 1;
+        i += 1;
+    }
+
+    // for(i = 1+nflag; i < argc; i++){
+    // 	strcpy(p, argv[i]);
+    // 	p += strlen(p);
+    // 	if(i < argc-1)
+    // 		*p++ = ' ';
+    // }
+
+    let mut p: String = String::new(); // p seems to be the buffer for the string
+    i = if n_flag { 1 + 1 } else { 1 + 0 };
+    while i < argv.len() {
+        p.push_str(argv.get(i).unwrap());
+        if i < argv.len() - 1 {
+            p.push_str(" ");
+            i+=1;
+        }
+        i+=1;
+    }
+
+    if n_flag == false {
+        p.push_str("\n");
+        // The C code would increment the pointer here but we don't really need to that as we won't read anything else...
+    }
+
+    io::stdout().write_all(p.as_bytes())?;
+    Ok(())
+}
