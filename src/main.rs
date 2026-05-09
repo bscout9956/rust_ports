@@ -20,14 +20,18 @@ fn makedir(path: &str, mode: u32) -> Result<(), Error> {
         std::fs::create_dir(path)?;
         // This only exists on unix. We sstill handle Windows just in case.
         // No idea about Mac lmao
-        #[cfg(unix)] {
+        #[cfg(unix)]
+        {
             use std::os::unix::fs::DirBuilderExt;
             let mut builder = DirBuilder::new();
             builder.mode(mode);
             builder.create(path)?;
         }
-        #[cfg(windows)] {
-            println!("You're on Windows NT, the directory will be created with default permissions...");
+        #[cfg(windows)]
+        {
+            println!(
+                "You're on Windows NT, the directory will be created with default permissions..."
+            );
         }
     }
     return Ok(());
