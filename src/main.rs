@@ -38,7 +38,6 @@ fn makedir(path: &str, mode: u32) -> Result<(), Error> {
 }
 
 fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
-    println!("Creating path: {}.", path);
     let mut path_str: String = String::new();
     let splits: Vec<&str> = path.split("/").collect();
 
@@ -46,9 +45,7 @@ fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
         path_str.push('/');
         path_str.push_str(sub_str);
 
-        println!("Checking if {} exists", path_str);
         if !exists(&path_str)? {
-            println!("Creating directory {} with mode {}.", path_str, mode);
             makedir(&path_str, mode)?;
         }
     }
@@ -66,7 +63,6 @@ fn main() -> Result<(), Error> {
 
     while i < argv.len() {
         let arg: &str = argv.get(i).unwrap();
-        println!("Argument is {}.", arg);
 
         if arg.starts_with("-") && arg.len() > 1 && arg != "--" {
             let mut j: usize = 1;
@@ -76,24 +72,19 @@ fn main() -> Result<(), Error> {
 
                 if flag == 'p' {
                     p_flag = true;
-                    println!("p flag set to true: {}.", p_flag);
                 }
 
                 if flag == 'm' {
-                    println!("m detected: {}.",flag);
                     let mut mode_str: String = String::new();
 
                     // If the next character is alphanumeric
                     // Means we got glued e.g: -m777
                     if arg.chars().nth(j + 1).is_some() {
                         mode_str = arg[j + 1..].to_string();
-                        println!("Glued permissions: {}.", mode_str);
                     } else {
-                        println!("Unglued permissions...");
                         match argv.get(i + 1).is_some() {
                             true => {
                                 mode_str = argv.get(i + 1).unwrap().to_string();
-                                println!("Unglued permission str: {}.", mode_str);
                             }
                             false => {
                                 usage();
@@ -105,7 +96,6 @@ fn main() -> Result<(), Error> {
                     let mode_res = u32::from_str_radix(mode_str.as_str(), 8);
                     if mode_res.is_ok() {
                         mode = mode_res.unwrap();
-                        println!("Converted mode: {} to u32: {}", mode_str, mode);
                         break; // We break, we found the mode
                     } else {
                         // Something went wrong, either the mode is invalid or something else...
@@ -126,9 +116,7 @@ fn main() -> Result<(), Error> {
     let directories: &[String] = &argv[i..];
 
     if !directories.is_empty() {
-        println!("Directories isn't empty");
         for dir in directories {
-            println!("Creating directory: {}.", dir);
             if p_flag {
                 makedirp(dir, mode)?;
             } else {
