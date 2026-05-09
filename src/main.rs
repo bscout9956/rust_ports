@@ -12,15 +12,11 @@ fn main() -> io::Result<()> {
         n_flag = true;
     }
 
-    let mut echo_str: String = String::new();
     let start_index: usize = if n_flag { 1 } else { 0 };
     
-    for str in &argv[start_index..] {
-        echo_str.push_str(str);
-        echo_str.push_str(" ");
-    }
+    let mut echo_str= argv[start_index..].join(" ");
 
-    if n_flag == false {
+    if !n_flag {
         echo_str.push_str("\n");
     }
 
