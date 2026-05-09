@@ -38,6 +38,7 @@ fn makedir(path: &str, mode: u32) -> Result<(), Error> {
 }
 
 fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
+    println!("Creating path: {}.", path);
     let mut path_str: String = String::new();
     let splits: Vec<&str> = path.split("/").collect();
 
@@ -46,6 +47,7 @@ fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
         path_str.push_str(sub_str);
 
         if !exists(&path_str).unwrap_or(false) {
+            println!("Creating directory {} with mode {}.", path_str, mode);
             makedir(&path_str, mode)?;
         }
     }
@@ -72,20 +74,25 @@ fn main() -> Result<(), Error> {
                 let flag: char = arg.chars().nth(j).unwrap();
 
                 if flag == 'p' {
+                    println!("p flag set to true: {}.", p_flag);
                     p_flag = true;
                 }
 
                 if flag == 'm' {
+                    println!("m detected: {}.",flag);
                     let mut mode_str: String = String::new();
 
                     // If the next character is alphanumeric
                     // Means we got glued e.g: -m777
                     if arg.chars().nth(j + 1).is_some() {
                         mode_str = arg[j + 1..].to_string();
+                        println!("Glued permissions: {}.", mode_str);
                     } else {
+                        println!("Unglued permissions...");
                         match argv.get(i + 1).is_some() {
                             true => {
                                 mode_str = argv.get(i + 1).unwrap().to_string();
+                                println!("Unglued permission str: {}.", mode_str);
                             }
                             false => {
                                 usage();
@@ -97,6 +104,7 @@ fn main() -> Result<(), Error> {
                     let mode_res = u32::from_str_radix(mode_str.as_str(), 8);
                     if mode_res.is_ok() {
                         mode = u32::from_str_radix(mode_str.as_str(), 8).unwrap();
+                        println!("Converted mode: {} to u32: {}", mode_str, mode);
                         break; // We break, we found the mode
                     } else {
                         // Something went wrong, either the mode is invalid or something else...
