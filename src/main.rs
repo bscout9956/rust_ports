@@ -46,7 +46,7 @@ fn makedirp(path: &str, mode: u32) -> Result<(), Error> {
         path_str.push('/');
         path_str.push_str(sub_str);
 
-        if !exists(&path_str).unwrap_or(false) {
+        if !exists(&path_str)? {
             println!("Creating directory {} with mode {}.", path_str, mode);
             makedir(&path_str, mode)?;
         }
