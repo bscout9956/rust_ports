@@ -75,8 +75,8 @@ fn main() -> Result<(), Error> {
                 let flag: char = arg.chars().nth(j).unwrap();
 
                 if flag == 'p' {
-                    println!("p flag set to true: {}.", p_flag);
                     p_flag = true;
+                    println!("p flag set to true: {}.", p_flag);
                 }
 
                 if flag == 'm' {
