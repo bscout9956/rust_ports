@@ -10,11 +10,6 @@ fn main() -> io::Result<()> {
         n_flag = true;
     }
 
-    i = if n_flag { 1 + 1 } else { 1 + 0 }; // solution to i+n_flag which would be one, but we're storing as true/false
-    while i < argv.len() {
-        i += 1;
-    }
-
     let mut p: String = String::new(); // p seems to be the buffer for the string
     i = if n_flag { 1 + 1 } else { 1 + 0 };
     while i < argv.len() {
