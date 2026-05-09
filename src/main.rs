@@ -63,6 +63,7 @@ fn main() -> Result<(), Error> {
 
     while i < argv.len() {
         let arg: &str = argv.get(i).unwrap();
+        println!("Argument is {}.", arg);
 
         if arg.starts_with("-") && arg.len() > 1 && arg != "--" {
             let mut j: usize = 1;
@@ -116,7 +117,9 @@ fn main() -> Result<(), Error> {
     let directories: &[String] = &argv[i..];
 
     if !directories.is_empty() {
+        println!("Directories isn't empty");
         for dir in directories {
+            println!("Creating directory: {}.", dir);
             if p_flag {
                 makedirp(dir, mode)?;
             } else {
