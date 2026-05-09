@@ -14,7 +14,7 @@ fn main() -> io::Result<()> {
 
     let start_index: usize = if n_flag { 1 } else { 0 };
     
-    let mut echo_str= argv[start_index..].join(" ");
+    let mut echo_str: String = argv[start_index..].join(" ");
 
     if !n_flag {
         echo_str.push_str("\n");
