@@ -8,7 +8,7 @@ fn main() -> io::Result<()> {
 
     let mut n_flag: bool = false;
     
-    if argv.len() > 0 && argv.get(0).is_some() && argv.get(0).unwrap() == "-n" {
+    if !argv.is_empty() && argv.first().unwrap() == "-n" {
         n_flag = true;
     }
 
