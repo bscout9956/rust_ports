@@ -12,7 +12,7 @@ fn main() -> io::Result<()> {
         n_flag = true;
     }
 
-    let start_index: usize = if n_flag { 1 } else { 0 };
+    let start_index: usize = usize::from(n_flag);
     
     let mut echo_str: String = argv[start_index..].join(" ");
 
