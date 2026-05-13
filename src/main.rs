@@ -17,7 +17,7 @@ fn main() -> io::Result<()> {
     let mut echo_str: String = argv[start_index..].join(" ");
 
     if !n_flag {
-        echo_str.push_str("\n");
+        echo_str.push('\n');
     }
 
     io::stdout().write_all(echo_str.as_bytes())?;
